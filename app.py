@@ -19,15 +19,23 @@ def add_item():
         return redirect(url_for('success'))
     return render_template('index.html', form=form)
 
-@app.route("/success")
+@app.route("/success", methods=('GET', 'POST'))
 def success():
     results = []
  
     qry = db_session.query(Items)
     results = qry.all()
-
-    return str(results)
+    total = len(results)
+    return render_template('result.html', results=results, total=total)
   
 
+@app.route("/remove/<int:id>", methods=['POST'])
+def remove(id):
+    items = db_session.query(Items).filter_by(id).first()
+    db_session.delete(items)
+    db_session.commit()
+    return redirect(url_for('success'))
+
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', debug=True)
