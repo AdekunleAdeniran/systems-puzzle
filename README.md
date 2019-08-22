@@ -66,3 +66,10 @@ No, you should focus on the functionality. Your engineering team will bring on a
 While technologies like Kubernetes are quite powerful, they're likely overkill for the simple application in this puzzle. We recommend that you stick to Docker Compose for this puzzle.
 
 ### Solution Review
+After running the codes
+```
+docker-compose up -d db
+docker-compose run --rm flaskapp /bin/bash -c "cd /opt/services/flaskapp/src && python -c  'import database; database.init_db()'"
+docker-compose up -d
+```
+I tried using  ```curl localhost:8080``` to check if the docker was up and running and I got ```curl: (7) Failed to connect to localhost port 8080: Connection refused```. My first instinct was to check the error logs
