@@ -1,7 +1,7 @@
 import datetime
 import os
 
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from forms import ItemForm
 from models import Items
 from database import db_session
@@ -29,12 +29,30 @@ def success():
     return render_template('result.html', results=results, total=total)
   
 
-@app.route("/remove/<int:id>", methods=['POST'])
+@app.route("/remove/<int:id>")
 def remove(id):
-    items = db_session.query(Items).filter_by(id).first()
+    items = db_session.query(Items).filter_by(id=id).first()
     db_session.delete(items)
     db_session.commit()
     return redirect(url_for('success'))
+
+
+@app.route("/update/<int:id>", methods=['GET', 'POST'])
+def update(id):
+    """Function to update posts"""
+    item = db_session.query(Items).filter_by(id=id).first()
+    form = ItemForm()
+    if request.method == 'POST' and form.validate_on_submit():
+        item.name = form.name.data
+        item.description = form.description.data
+        item.quantity = form.quantity.data
+        db_session.commit()
+        return redirect(url_for('success'))
+    elif request.method == 'GET':
+        form.name.data = item.name
+        form.description.data = item.description
+        form.quantity.data = item.quantity
+    return render_template('edit.html', form=form)
 
 
 if __name__ == '__main__':
