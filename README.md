@@ -65,11 +65,34 @@ No, you should focus on the functionality. Your engineering team will bring on a
 ### Should I use orchestration tools like Kubernetes?
 While technologies like Kubernetes are quite powerful, they're likely overkill for the simple application in this puzzle. We recommend that you stick to Docker Compose for this puzzle.
 
-### Solution Review
+### Solution Approach
 After running the codes
 ```
 docker-compose up -d db
 docker-compose run --rm flaskapp /bin/bash -c "cd /opt/services/flaskapp/src && python -c  'import database; database.init_db()'"
 docker-compose up -d
 ```
-I tried using  ```curl localhost:8080``` to check if the docker was up and running and I got ```curl: (7) Failed to connect to localhost port 8080: Connection refused```. My first instinct was to check the error logs
+I tried using  ```curl localhost:8080``` to check if it was up and running and I got ```curl: (7) Failed to connect to localhost port 8080: Connection refused```. My first instinct was to check the error logs
+
+Before I discovered I could use the Docker extension on VS-CODE to degub much easier, I was using ```docker ps``` to identify the individual containers running and used ```docker logs <container id>``` to check for all logs in each container. 
+
+This didn't give any error messages to work with so i decided to review the files one by one starting with the docker-compose.yml. 
+
+I also reviewed docker-compose documentation where I discovered that the nginx port mapping should be mapping the 8080 of local host to port 80 of the container ```8080:80``` but instead, it was mapping the other way around ```80:8080```.
+So I changed this setting and restarted the docker-compose. 
+
+Running ```curl localhost:8080``` again, I got
+```
+html>
+<head><title>502 Bad Gateway</title></head>
+<body bgcolor="white">
+<center><h1>502 Bad Gateway</h1></center>
+<hr><center>nginx/1.13.5</center>
+</body>
+</html>
+```
+
+After some read up of various articles, I experimented with changing the proxy_pass of the flaskapp to port 5000  in the flaskapp.conf and also changed the EXPOSE port in Dockerfile to 5000. This enabled the site to load the Welcome webpage.
+
+I attempted to add some items using the forms but got an error:
+The redirect was loading an error page at ```localhost,localhost:8000``` 
