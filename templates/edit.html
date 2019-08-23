@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+    <body>
+        <h2> Edit your items below? </h2>
+        <form method="POST">
+            {{ form.csrf_token }}
+            {{ form.name.label }} {{ form.name(size=20) }}
+            {{ form.quantity.label }} {{ form.quantity(size=4) }}
+            {{ form.description.label }} {{ form.description(size=40) }}
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>
