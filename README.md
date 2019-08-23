@@ -99,8 +99,11 @@ The redirect was loading an error page at ```localhost,localhost:8000```
 I honestly didn't understand the reason why I was getting this error. I spent some time on Google looking for a solution but didn't find any. I however asked a collegue about nginx configurations for redirect errors and he pointed me to some [articles](https://www.nginx.com/resources/wiki/start/topics/examples/likeapache/) online where I found that NGINX does not have ProxyPassReverse. The solution was adding a few missing HTTP headers.
 
 Fixing the headers enabled the redirect to load properly but I noticed the page returning ```[,,,]``` with the length increasing with every new entry I made. By using ```curl localhost:8080/success``` and got
-```[<models.Items object at 0x7f10356528d0>, <models.Items object at 0x7f1035652990>, <models.Items object at 0x7f1035652a10>, <models.Items object at 0x7f1035652a
-90>]```
+```
+[<models.Items object at 0x7f10356528d0>, <models.Items object at 0x7f1035652990>, <models.Items object at 0x7f1035652a10>, <models.Items object at 0x7f1035652a
+90>]
+```
+
 Meaning I was returning an object. Also on reviewing the forms.py file, I noticed that the quantity was being passed a StringField instead of an IntegerField and I changed this as well.
 
 To get the result properly printed, I created a result.html where I could take the object being passed and print out the content of the object.
