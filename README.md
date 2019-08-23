@@ -100,7 +100,8 @@ I honestly didn't understand the reason why I was getting this error. I spent so
 
 Fixing the headers enabled the redirect to load properly but I noticed the page returning ```[,,,]``` with the length increasing with every new entry I made. By using ```curl localhost:8080/success``` and got
 ```
-[<models.Items object at 0x7f10356528d0>, <models.Items object at 0x7f1035652990>, <models.Items object at 0x7f1035652a10>, <models.Items object at 0x7f1035652a
+[<models.Items object at 0x7f10356528d0>, <models.Items object at 0x7f1035652990>, 
+<models.Items object at 0x7f1035652a10>, <models.Items object at 0x7f1035652a
 90>]
 ```
 
