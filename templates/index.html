@@ -3,7 +3,7 @@
     <body>
         <div>
             <a href="#">Home</a>
-            <a href="{{ url_for('success') }}">Results</a>
+            <a href="{{ url_for('success') }}">Storage</a>
         </div>
         <h1> Welcome! </h1>
         <h2> Please enter items that you would like to sell? </h2>
@@ -11,7 +11,7 @@
             {{ form.csrf_token }}
             {{ form.name.label }} {{ form.name(size=20) }}
             {{ form.quantity.label }} {{ form.quantity(size=4) }}
-            {{ form.description.label }} {{ form.description(size=4) }}
+            {{ form.description.label }} {{ form.description(size=40) }}
             <input type="submit" value="Enter Item">
         </form>
     </body>
