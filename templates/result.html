@@ -3,15 +3,27 @@
     <body>
         <div>
             <a href="{{ url_for('add_item') }}">Home</a>
-            <a href="#">Results</a>
+            <a href="#">Storage</a>
         </div>
         <h1> Storage </h1>
-        <h2> Please find your Store content here </h2>
-        {% for result in results%}
+        <h4>There are {{ total }} item(s) in your storage. Click <a href="{{ url_for('add_item') }}">here</a> to add more. </h4>
         <div>
-            <li> {{ result.name }} {{ result.quantity }} {{ result.description }}</li>
+            <table>
+                <tr>
+                    <th> Name </th>
+                    <th> Quantity </th>
+                    <th> Description </th>
+                </tr>
+                {% for result in results%}
+                <tr> 
+                    <td> {{ result.name }} </td> 
+                    <td> {{ result.quantity }}</td>
+                    <td> {{ result.description }} </td>
+                    <td> <a href="/remove/{{ result.id }}"><button type="button">Remove</button></a></td>
+                    <td> <a href="/update/{{ result.id }}"><button type="button">Edit</button></a></td>
+                </tr>
+                {% endfor %}
+            </table>
         </div>
-        {% endfor %}
-        <h3>There are {{ total }} items in your storage </h3>
     </body>
 </html>
