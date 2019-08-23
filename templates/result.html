@@ -19,8 +19,8 @@
                     <td> {{ result.name }} </td> 
                     <td> {{ result.quantity }}</td>
                     <td> {{ result.description }} </td>
-                    <td> <a href="/remove/{{ result.id }}"><button type="button">Remove</button></a></td>
                     <td> <a href="/update/{{ result.id }}"><button type="button">Edit</button></a></td>
+                    <td> <a href="/remove/{{ result.id }}"><button type="button">Remove</button></a></td>
                 </tr>
                 {% endfor %}
             </table>
