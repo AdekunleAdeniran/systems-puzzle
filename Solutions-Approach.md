@@ -25,7 +25,7 @@ html>
 </html>
 ```
 
-After reading various articles, I experimented with changing the proxy_pass of the flaskapp to port 5000  in the flaskapp.conf and also changed the EXPOSE port in Dockerfile to 5000. This enabled the site to load the Welcome webpage.
+After reading various articles, I experimented with changing the proxy_pass of the flaskapp to port 5000 in the flaskapp.conf and also changed the EXPOSE port in Dockerfile to 5000. This enabled the site to load the Welcome webpage.
 
 I attempted to add some items using the forms but got an error:
 The redirect was loading an error page at ```localhost,localhost:8000``` 
