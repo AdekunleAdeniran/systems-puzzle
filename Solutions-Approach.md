@@ -29,7 +29,7 @@ After reading various articles, I experimented with changing the proxy_pass of t
 
 I attempted to add some items using the forms but got an error:
 The redirect was loading an error page at ```localhost,localhost:8000``` 
-I honestly didn't understand the reason why I was getting this error. I spent some time on Google looking for a solution but didn't find any. I however asked a collegue about nginx configurations for redirect errors and he pointed me to some [articles](https://www.nginx.com/resources/wiki/start/topics/examples/likeapache/) online where I found that NGINX does not have ProxyPassReverse. The solution was adding a few missing HTTP headers.
+I honestly didn't understand the reason why I was getting this error. I spent some time on Google looking for a solution but didn't find any. I however asked a collegue about nginx configurations for redirect errors and he pointed me to some [articles](https://www.nginx.com/resources/wiki/start/topics/examples/likeapache/) online where I found that NGINX does not have ProxyPassReverse. The solution was adding a few missing HTTP headers. I also added ```debug=True``` to the app.py file so that I could make changes and see them in real time without having to restart the flaskapp when I got an exception during execution.
 
 Fixing the headers enabled the redirect to load properly but I noticed the page returning ```[,,,]``` with the length increasing with every new entry I made. By using ```curl localhost:8080/success``` and got
 ```
