@@ -109,4 +109,4 @@ Meaning I was returning an object. Also on reviewing the forms.py file, I notice
 
 To get the result properly printed, I created a result.html where I could take the object being passed and print out the content of the object.
 
-With this, I was able properly display the results in better format. With this is place, I presumed to make the app a basic CRUD by adding Update and Delete functionality to it.
+With this, I was able properly display the results in better format. With this is place, I presumed to make the app a basic CRUD by adding Update and Delete functionality to it. This required the addition of an ```edit.html``` file to pass the form contents back to user to edit and save.
